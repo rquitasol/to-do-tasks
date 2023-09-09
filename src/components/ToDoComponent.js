@@ -1,50 +1,50 @@
 import React, { useEffect, useState } from "react";
-import { AddTask } from "./AddTask";
-
+import { CreateTask } from "./CreateTask";
+import { Task } from "./Task";
+import { SearchTask } from "./SearchTask";
 export const ToDoComponent = () => {
-  const [tasks, setTasks] = useState([]);
+  const [storedTasks, setStoredTasks] = useState([]);
+  const [filteredTasks, setFilteredTasks] = useState([]);
 
+  // Render previous tasks saved in storage
   useEffect(() => {
-    const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
-    console.log("storedTasks", storedTasks);
-    setTasks(storedTasks);
+    const localStorageTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    setStoredTasks(localStorageTasks);
+    setFilteredTasks(localStorageTasks);
   }, []);
 
+  // Store tasks after render
   useEffect(() => {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-  }, [tasks]);
+    localStorage.setItem("tasks", JSON.stringify(storedTasks));
+  }, [storedTasks]);
 
-  const addTask = (newTask) => {
-    setTasks([...tasks, newTask]);
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+  const createTask = (newTask) => {
+    const updatedStoredTasks = [...storedTasks, newTask];
+    setStoredTasks(updatedStoredTasks);
+    setFilteredTasks(updatedStoredTasks);
   };
 
-  const handleClick = (name) => {
-    const taskArr = tasks.filter((task) => {
-      return task.name !== name;
-    });
-    setTasks(taskArr);
+  const removeTask = (taskName) => {
+    const updatedTasks = storedTasks.filter((task) => task.name !== taskName);
+    setStoredTasks(updatedTasks);
+    setFilteredTasks(updatedTasks);
   };
-
-  const taskList = tasks.map((task, idx) => {
-    const name = task.name;
-    const description = task.description;
-
-    return (
-      <li key={name} id={name} value={name}>
-        {JSON.stringify(task)}
-        <button onClick={() => handleClick(name)}>X</button>
-      </li>
-    );
-  });
 
   return (
     <div>
-      <AddTask addTask={addTask} />
+      <SearchTask
+        filteredTasks={filteredTasks}
+        setFilteredTasks={setFilteredTasks}
+      />
+      <CreateTask createTask={createTask} />
       <div>
         <h1>Task List</h1>
         <div>
-          <ul>{taskList}</ul>
+          <ul className="tasks">
+            {filteredTasks.map((task, idx) => (
+              <Task key={idx} task={task} removeTask={removeTask} />
+            ))}
+          </ul>
         </div>
       </div>
     </div>

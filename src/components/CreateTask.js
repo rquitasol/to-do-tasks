@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export const AddTask = ({ addTask }) => {
+export const CreateTask = ({ createTask }) => {
   const [taskName, setTaskName] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
 
@@ -9,7 +9,7 @@ export const AddTask = ({ addTask }) => {
     if (!taskName || !taskDescription) {
       alert("Fill in everything!");
     } else {
-      addTask({ name: taskName, description: taskDescription });
+      createTask({ name: taskName, description: taskDescription });
     }
 
     setTaskName("");
@@ -18,6 +18,7 @@ export const AddTask = ({ addTask }) => {
 
   return (
     <div>
+      <h2>Add Task</h2>
       <form>
         <label htmlFor="taskName" style={{ display: "block" }}>
           Name:
