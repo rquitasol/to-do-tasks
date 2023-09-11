@@ -1,15 +1,24 @@
 import React, { useState } from "react";
 import debounce from "lodash.debounce";
 
-export const SearchTask = ({ filteredTasks, setFilteredTasks }) => {
+export const SearchTask = ({
+  filteredTasks,
+  setFilteredTasks,
+  openCreateTask,
+  storedTasks,
+}) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const debouncedSearch = debounce((term) => {
-    const filtered = filteredTasks.filter((task) =>
-      task.name.toLowerCase().includes(term.toLowerCase())
-    );
-    setFilteredTasks(filtered);
-  }, 2000);
+    if (term !== "") {
+      const filtered = filteredTasks.filter((task) =>
+        task.name.toLowerCase().includes(term.toLowerCase())
+      );
+      setFilteredTasks(filtered);
+    } else {
+      setFilteredTasks(storedTasks);
+    }
+  }, 1000);
 
   const handleSearchChange = (e) => {
     const term = e.target.value;
@@ -17,9 +26,12 @@ export const SearchTask = ({ filteredTasks, setFilteredTasks }) => {
     debouncedSearch(term);
   };
 
+  const openCreateModal = () => {
+    openCreateTask(true);
+  };
+
   return (
     <div>
-      <h2>SearchTask</h2>
       <input
         id="searchTerm"
         name="searchTerm"
@@ -28,6 +40,9 @@ export const SearchTask = ({ filteredTasks, setFilteredTasks }) => {
         value={searchTerm}
         placeholder="Search tasks..."
       />
+      <button className="btn" onClick={openCreateModal}>
+        Create
+      </button>
     </div>
   );
 };
