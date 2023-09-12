@@ -15,6 +15,9 @@ The app allows users to create, updated, and delete tasks
 
 ## Screenshots
 
+![image]https://github.com/rquitasol/to-do-tasks/blob/main/src/assets/screenshots/TaskApp.JPG
+![image]https://github.com/rquitasol/to-do-tasks/blob/main/src/assets/screenshots/TaskCreate.JPG
+
 ## Technologies Used
 
 - DaisyUi and Tailwind CSS
