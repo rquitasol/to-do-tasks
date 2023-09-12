@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Task } from "./Task";
 import { TaskList } from "./TaskList";
-import { SearchTask } from "./SearchTask";
+import { TaskFunctions } from "./TaskFunctions";
 import "../assets/styles/task.css";
 
-export const ToDoComponent = () => {
+export const TaskApp = () => {
   const [storedTasks, setStoredTasks] = useState([]);
   const [filteredTasks, setFilteredTasks] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -44,6 +44,7 @@ export const ToDoComponent = () => {
       }
       return task;
     });
+
     setStoredTasks(updatedStoredTasks);
     setFilteredTasks(updatedStoredTasks);
   };
@@ -60,9 +61,9 @@ export const ToDoComponent = () => {
   };
 
   return (
-    <div>
-      <h2>Search</h2>
-      <SearchTask
+    <div className="todo-app">
+      <h2 className="task-header">Todo App</h2>
+      <TaskFunctions
         filteredTasks={filteredTasks}
         setFilteredTasks={setFilteredTasks}
         openCreateTask={openCreateTask}
@@ -78,17 +79,28 @@ export const ToDoComponent = () => {
         />
       )}
       <div>
-        <h2>Task List</h2>
-        <ul>
-          {filteredTasks.map((task, idx) => (
-            <TaskList
-              key={idx}
-              task={task}
-              deleteTask={deleteTask}
-              openUpdateTask={openUpdateTask}
-            />
-          ))}
-        </ul>
+        <h2 className="task-header">Tasks</h2>
+        <div>
+          <table className="table">
+            <thead>
+              <tr>
+                <th>Task</th>
+                <th>Description</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredTasks.map((task, idx) => (
+                <TaskList
+                  key={idx}
+                  task={task}
+                  deleteTask={deleteTask}
+                  openUpdateTask={openUpdateTask}
+                />
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

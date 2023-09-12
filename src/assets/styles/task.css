@@ -4,7 +4,7 @@ body.active-modal {
 
 .btn-modal {
   padding: 10px 20px;
-  display: block;
+  display: flex;
   margin: 100px auto 0;
   font-size: 18px;
 }
@@ -24,7 +24,7 @@ body.active-modal {
   background: rgba(42, 54, 54, 0.8);
 }
 
-.task-modal-content {
+.modal-box {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -32,7 +32,7 @@ body.active-modal {
   line-height: 1.4;
   background-color: #282c34;
   padding: 14px 28px;
-  border-radius: 3px;
+  border-radius: 30px;
   max-width: 600px;
   min-width: 300px;
 }
@@ -42,4 +42,42 @@ body.active-modal {
   top: 10px;
   right: 10px;
   padding: 5px 7px;
+}
+
+.modal-box {
+  width: 20rem;
+}
+
+.textarea {
+  height: 10rem;
+}
+
+.table {
+  position: inherit;
+}
+
+.function-bar {
+  margin-right: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding: 1rem;
+}
+
+.task-header {
+  background-color: gray;
+  border-width: 10px;
+  border-color: gray;
+  font-family: fantasy;
+  font-size: xx-large;
+  max-width: 100%;
+}
+
+.todo-app {
+  border-color: gray;
+  border-width: 8px;
+  border-radius: 20px;
+}
+
+#searchTerm {
+  margin-right: 10px;
 }

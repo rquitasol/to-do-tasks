@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import debounce from "lodash.debounce";
 
-export const SearchTask = ({
+export const TaskFunctions = ({
   filteredTasks,
   setFilteredTasks,
   openCreateTask,
@@ -31,7 +31,7 @@ export const SearchTask = ({
   };
 
   return (
-    <div>
+    <div className="function-bar">
       <input
         id="searchTerm"
         name="searchTerm"
@@ -39,8 +39,9 @@ export const SearchTask = ({
         onChange={handleSearchChange}
         value={searchTerm}
         placeholder="Search tasks..."
+        className="input input-bordered input-md  max-w-xs"
       />
-      <button className="btn" onClick={openCreateModal}>
+      <button className="btn " onClick={openCreateModal}>
         Create
       </button>
     </div>

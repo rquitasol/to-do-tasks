@@ -6,8 +6,10 @@ export const Task = ({ task, createTask, closeTask, updateTask }) => {
   const [taskDescription, setTaskDescription] = useState("");
 
   useEffect(() => {
-    setTaskName(task?.name);
-    setTaskDescription(task?.description);
+    if (task) {
+      setTaskName(task.name || "");
+      setTaskDescription(task.description || "");
+    }
   }, [task]);
 
   const closeCreateTask = () => {
@@ -35,38 +37,52 @@ export const Task = ({ task, createTask, closeTask, updateTask }) => {
     <div>
       <div className="task-modal">
         <div onClick={closeCreateTask} className="overlay"></div>
-        <div className="task-modal-content">
-          <button className="btn" onClick={closeCreateTask}>
-            x
-          </button>
-          <h3 className="font-bold text-lg">Add Task</h3>
-          <form>
-            <label htmlFor="taskName">Name:</label>
-            <input
-              id="taskName"
-              name="taskName"
-              type="text"
-              value={taskName}
-              onChange={(e) => setTaskName(e.target.value)}
-            />
-            <br />
-            <label htmlFor="taskDescription"> Description:</label>
-            <textarea
-              id="taskDescription"
-              type="text"
-              value={taskDescription}
-              onChange={(e) => setTaskDescription(e.target.value)}
-              rows="10"
-              cols="10"
-            />
-            <br />
+        <div className="modal-box">
+          <div className="modal-header">
+            <h2 className="font-bold text-lg">
+              {!task ? "Add Task" : "Update Task"}
+            </h2>
             <button
-              className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg"
-              onClick={handleSubmit}
+              className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+              onClick={closeCreateTask}
             >
-              Save
+              X
             </button>
-          </form>
+          </div>
+          <div className="form-control w-full max-w-xs">
+            <form>
+              <label className="label" htmlFor="taskName">
+                <span className="label-text">Name:</span>
+              </label>
+
+              <div>
+                <input
+                  className="input input-bordered w-full max-w-xs"
+                  id="taskName"
+                  type="text"
+                  value={taskName}
+                  onChange={(e) => setTaskName(e.target.value)}
+                />
+              </div>
+              <label className="label" htmlFor="taskDescription">
+                <span className="label-text">Description:</span>
+              </label>
+              <textarea
+                className="textarea textarea-bordered textarea-md w-full max-w-xs"
+                id="taskDescription"
+                type="text"
+                value={taskDescription}
+                onChange={(e) => setTaskDescription(e.target.value)}
+              />
+              <br />
+              <button
+                className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg"
+                onClick={handleSubmit}
+              >
+                Save
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
