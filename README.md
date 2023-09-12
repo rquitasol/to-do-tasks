@@ -13,6 +13,8 @@ The app allows users to create, updated, and delete tasks
 
 ## Live Demo
 
+You can check out the live demo of the Todo List web app [here]([https://abdellatif-laghjaj.github.io/todo-list/](https://rquitasol-to-do-task.netlify.app/))).
+
 ## Screenshots
 
 ![image](https://github.com/rquitasol/to-do-tasks/blob/main/src/assets/screenshots/TaskApp.JPG)
